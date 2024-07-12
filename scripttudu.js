@@ -13,13 +13,13 @@ taskForm.addEventListener('submit', function(event) {
     //Con el valor de input creamos una nueva tarea
     const taskText = newTaskInput.value.trim();
     if (taskText != '') { //si input es diferente de vacio, agrega una nueva tarea
-        addTask(taskText);
+        addTask(taskText, true);
         newTaskInput.value = '';
     }
 });
 
 //Funcion para añadir una nueva tarea
-function addTask(taskText) {
+function addTask(taskText, save = false) {
     const li = document.createElement('li'); //creamos un nuevo elemento li
     li.textContent = taskText; //Añadimos el texto del input a la tarea creada
 
@@ -33,7 +33,10 @@ function addTask(taskText) {
     li.appendChild(deleteButton); //Añadimos el boton de eliminar a la tarea
     taskList.appendChild(li); //Añadimos la tarea a la lista
 
-    saveTaskToLocalStorage(taskText); //Guardamos la tarea en el local storage
+    if (save) {
+        saveTaskToLocalStorage(taskText); //Guardamos la tarea en el local storage
+    }
+
 }
 
 //Funcion para cargar las tareas del local storage
